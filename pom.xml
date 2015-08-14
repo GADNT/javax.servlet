@@ -51,7 +51,7 @@
     </parent>
 
     <groupId>javax.servlet</groupId>
-    <artifactId>javax.servlet-api</artifactId>
+    <artifactId>javax.servlet-api-SERVLET_SPEC-134</artifactId>
     <packaging>jar</packaging>
     <version>4.0.0-b01-SNAPSHOT</version>
 
@@ -61,7 +61,7 @@
         <bundle.symbolicName>javax.servlet-api</bundle.symbolicName>
         <bundle.version>4.0.0</bundle.version>
         <window.title>Java Servlet 4.0</window.title>
-        <doc.title>Java Servlet 4.0 API Specification</doc.title>
+        <doc.title>Java Servlet 4.0 API Specification SERVLET_SPEC-134 BRANCH (${maven.build.timestamp})</doc.title>
         <vendor.name>Oracle Corporation</vendor.name>
         <implementation.vendor.id>org.glassfish</implementation.vendor.id>
         <findbugs.version>3.0.1</findbugs.version>
@@ -130,9 +130,9 @@
         </mailingList>
     </mailingLists>
     <scm>
-        <connection>scm:svn:https://svn.java.net/svn/glassfish~svn/trunk/api/javaee-api/javax.servlet</connection>
-        <developerConnection>scm:svn:https://svn.java.net/svn/glassfish~svn/trunk/api/javaee-api/javax.servlet</developerConnection>
-        <url>http://java.net/projects/glassfish/sources/svn/show/trunk/api/javaee-api/javax.servlet</url>
+        <connection>scm:svn:https://svn.java.net/svn/glassfish~svn/branches/SERVLET_SPEC-134</connection>
+        <developerConnection>scm:svn:https://svn.java.net/svn/glassfish~svn/branches/SERVLET_SPEC-134</developerConnection>
+        <url>scm:svn:https://svn.java.net/svn/glassfish~svn/branches/SERVLET_SPEC-134</url>
     </scm>
 
     <build>
