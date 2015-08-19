@@ -323,6 +323,7 @@ public interface HttpServletRequest extends ServletRequest {
              public PushBuilder conditional(boolean conditional) { return this; }
              public PushBuilder setHeader(String name, String value) { return this; }
              public PushBuilder addHeader(String name, String value) { return this; }
+             public PushBuilder removeHeader(String name) { return this; }
              public PushBuilder path(String path) { return this; }
              public PushBuilder etag(String etag) { return this; }
              public PushBuilder lastModified(String lastModified) { return this; }
