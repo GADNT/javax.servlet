@@ -98,7 +98,7 @@ import javax.servlet.http.HttpSession;
  * be set with a container generated token that will result in equivalent
  * Authorization for the pushed request.</li>
  *
- * <li>The query string from {@link HttpServletRequest#getQueryString()}
+ * <li class="changed_deleted_4_0">The query string from {@link HttpServletRequest#getQueryString()}</li>
  *
  * <li>The {@link HttpServletRequest#getRequestedSessionId()} value,
  * unless at the time of the call {@link
@@ -185,19 +185,36 @@ public interface PushBuilder
      */
     public abstract PushBuilder conditional(boolean conditional);
     
-    /** Set a header to be used for the push.  
+    /** 
+     * <p class="changed_modified_4_0">Set a header to be used for the
+     * push.  If the builder has an existing header with the same name,
+     * its value is overwritten.</p>
+     *
      * @param name The header name to set
      * @param value The header value to set
      * @return this builder.
      */
     public abstract PushBuilder setHeader(String name, String value);
+
     
-    /** Add a header to be used for the push.  
+    /** <p class="changed_deleted_4_0">Add a header to be used for the push.</p>
      * @param name The header name to add
      * @param value The header value to add
      * @return this builder.
      */
     public abstract PushBuilder addHeader(String name, String value);
+
+
+    /** 
+     * <p class="changed_added_4_0">Remove the named header.  If the
+     * header does not exist, take no action.</p>
+     *
+     * @param name The name of the header to remove
+     * @return this builder.
+     */
+    public abstract PushBuilder removeHeader(String name);
+
+    
     
     /** Set the URI path to be used for the push.  
      * The path may start with "/" in which case it is treated as an
