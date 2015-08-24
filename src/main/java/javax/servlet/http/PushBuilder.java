@@ -121,6 +121,11 @@ import javax.servlet.http.HttpSession;
  * true.</li> 
  *
  * </ul> 
+ *
+ * <p>The {@link #path} method must be called on the {@code PushBuilder}
+ * instance before the call to {@link #push}.  Failure to do so must
+ * cause an {@code IllegalArgumentException} to be thrown from {@link
+ * #push}.
  * 
  * <p>A PushBuilder can be customized by chained calls to mutator
  * methods before the {@link #push()} method is called to initiate an
@@ -155,10 +160,11 @@ public interface PushBuilder
     
     /** Set the query string to be used for the push.  
      *
-     * Will be appended to any query String included in a call to {@link #path(String)}.  This 
-     * method should be used instead of a query in {@link #path(String)} when multiple
-     * {@link #push()} calls are to be made with the same query string, or to remove a 
-     * query string obtained from the associated request.
+     * Will be appended to any query String included in a call to {@link
+     * #path(String)}.  <span class="changed_added_4_0">Any duplicate
+     * parameters must be preserved.</span> This method should be used
+     * instead of a query in {@link #path(String)} when multiple {@link
+     * #push()} calls are to be made with the same query string.
      * @param  queryString the query string to be used for the push. 
      * @return this builder.
      */
@@ -216,12 +222,15 @@ public interface PushBuilder
 
     
     
-    /** Set the URI path to be used for the push.  
-     * The path may start with "/" in which case it is treated as an
-     * absolute path, otherwise it is relative to the context path of
-     * the associated request.
-     * There is no path default and {@link #path(String)} must be called
-     * before every call to {@link #push()}
+    /** Set the URI path to be used for the push.  The path may start
+     * with "/" in which case it is treated as an absolute path,
+     * otherwise it is relative to the context path of the associated
+     * request.  There is no path default and {@link #path(String)} must
+     * be called before every call to {@link #push()}.  <span
+     * class="changed_added_4_0">If a query string is present in the
+     * argument {@code path}, its contents must be merged with the
+     * contents previously passed to {@link #queryString}, preserving
+     * duplicates.</span>
      * @param path the URI path to be used for the push, which may include a
      * query string.
      * @return this builder.
@@ -265,6 +274,12 @@ public interface PushBuilder
      * is for possible reuse in another push.</p>
      *
      * @throws IllegalArgumentException if the method set expects a request body (eg POST)
+     *
+     * @throws IllegalArgumentException <span
+     * class="changed_added_4_0">if there was no call to {@link #path}
+     * on this instance either between its instantiation or the last
+     * call to {@code push()} that did not throw an
+     * IllegalArgumentException.</span>
      */
     public abstract void push();
     
