@@ -124,8 +124,8 @@ import javax.servlet.http.HttpSession;
  *
  * <p>The {@link #path} method must be called on the {@code PushBuilder}
  * instance before the call to {@link #push}.  Failure to do so must
- * cause an {@code IllegalArgumentException} to be thrown from {@link
- * #push}.
+ * cause an exception to be thrown from {@link
+ * #push}, as specified in that method.</p>
  * 
  * <p>A PushBuilder can be customized by chained calls to mutator
  * methods before the {@link #push()} method is called to initiate an
@@ -275,11 +275,11 @@ public interface PushBuilder
      *
      * @throws IllegalArgumentException if the method set expects a request body (eg POST)
      *
-     * @throws IllegalArgumentException <span
+     * @throws IllegalStateException <span
      * class="changed_added_4_0">if there was no call to {@link #path}
      * on this instance either between its instantiation or the last
      * call to {@code push()} that did not throw an
-     * IllegalArgumentException.</span>
+     * IllegalStateException.</span>
      */
     public abstract void push();
     
