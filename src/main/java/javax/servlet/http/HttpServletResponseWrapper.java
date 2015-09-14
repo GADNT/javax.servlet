@@ -60,6 +60,7 @@ package javax.servlet.http;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.Optional;
 import javax.servlet.ServletResponseWrapper;
 
 /**
@@ -257,6 +258,13 @@ public class HttpServletResponseWrapper extends ServletResponseWrapper implement
     public void setStatus(int sc, String sm) {
         this._getHttpServletResponse().setStatus(sc, sm);
     }
+
+    @Override
+    public Optional<Priority> getPriority() {
+        return _getHttpServletResponse().getPriority(); 
+    }
+    
+    
 
     /**
      * The default behaviour of this method is to call

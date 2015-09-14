@@ -60,13 +60,14 @@ package javax.servlet.http;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.Optional;
 import javax.servlet.ServletResponse;
 
 /**
  *
- * Extends the {@link ServletResponse} interface to provide HTTP-specific
- * functionality in sending a response.  For example, it has methods
- * to access HTTP headers and cookies.
+ * <p class="changed_modified_4_0">Extends</p> the {@link ServletResponse} 
+ * interface to provide HTTP-specific functionality in sending a response.  For 
+ * example, it has methods to access HTTP headers and cookies.
  *
  * <p>The servlet container creates an <code>HttpServletResponse</code> object
  * and passes it as an argument to the servlet's service methods
@@ -315,6 +316,29 @@ public interface HttpServletResponse extends ServletResponse {
      * @see #setHeader
      */
     public void addHeader(String name, String value);
+    
+    /**
+     * <p class="changed_added_4_0">Set the priority of this response to a 
+     * {@code clone()} of the argument {@code priority}.
+     *  Servlet 4.0 compliant implementations must override this method.</p>
+     * 
+     * <div class="changed_added_4_0">
+     * 
+     * <p>For compatibility with older runtimes, a default implementation must
+     * be provided that takes no action.</p>
+     * 
+     * </div>
+     * 
+     * @param priority the new priority to replace any existing value 
+     * with the return from {@code clone()} on this parameter.
+     * 
+     * @throws NullPointerException if {@code priority} is {@code null}.
+     * 
+     * @since 4.0
+     */
+    default public void setPriority(Priority priority) {
+        
+    }
 
     /**
      * Sets a response header with the given name and
@@ -380,6 +404,26 @@ public interface HttpServletResponse extends ServletResponse {
      */
     @Deprecated
     public void setStatus(int sc, String sm);
+    
+    /**
+     * <p class="changed_added_4_0">Return the {@link Priority} associated
+     * with this response, if any.  Servlet 4.0 compliant implementations must
+     * override this method.  This method must never return {@code null}.</p>
+     * 
+     * <div class="changed_added_4_0">
+     * 
+     * <p>For compatibility with older runtimes, a default implementation must
+     * be provided that returns {@code Optional.empty()}.</p>
+     * 
+     * </div>
+     *
+     * @return An {@code Optional&lt;Priority&gt} for this response.
+     * 
+     * @since 4.0
+     */
+    default public Optional<Priority> getPriority() {
+        return Optional.empty();
+    }
 
     /**
      * Gets the current status code of this response.
