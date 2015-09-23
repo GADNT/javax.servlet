@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 1997-2010 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997-2015 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -37,23 +37,6 @@
  * only if the new code is made subject to such option by the copyright
  * holder.
  *
- *
- * This file incorporates work covered by the following copyright and
- * permission notice:
- *
- * Copyright 2004 The Apache Software Foundation
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
  */
 
 package javax.servlet;
@@ -64,63 +47,72 @@ import java.util.ResourceBundle;
 
 /**
  *
- * Defines a generic, protocol-independent
- * servlet. To write an HTTP servlet for use on the
- * Web, extend {@link javax.servlet.http.HttpServlet} instead.
+ * <p class="changed_added_4_0">Defines a generic, protocol-independent
+ * filter. To write an HTTP filter for use on the
+ * Web, extend {@link javax.servlet.http.HttpFilter} instead.</p>
  *
- * <p><code>GenericServlet</code> implements the <code>Servlet</code>
- * and <code>ServletConfig</code> interfaces. <code>GenericServlet</code>
- * may be directly extended by a servlet, although it's more common to extend
- * a protocol-specific subclass such as <code>HttpServlet</code>.
+ * <div class="changed_added_4_0">
+ * 
+ * <p><code>GenericFilter</code> implements the <code>Filter</code>
+ * and <code>FilterConfig</code> interfaces. <code>GenericFilter</code>
+ * may be directly extended by a filter, although it's more common to extend
+ * a protocol-specific subclass such as <code>HttpFilter</code>.
  *
- * <p><code>GenericServlet</code> makes writing servlets
+ * <p><code>GenericFilter</code> makes writing filters
  * easier. It provides simple versions of the lifecycle methods 
  * <code>init</code> and <code>destroy</code> and of the methods 
- * in the <code>ServletConfig</code> interface. <code>GenericServlet</code>
+ * in the <code>FilterConfig</code> interface. <code>GenericFilter</code>
  * also implements the <code>log</code> method, declared in the
  * <code>ServletContext</code> interface. 
  *
- * <p>To write a generic servlet, you need only
- * override the abstract <code>service</code> method. 
+ * <p>To write a generic filter, you need only
+ * override the abstract <code>doFilter</code> method. 
  *
- *
+ * </div>
+ * 
  * @author 	Various
+ * 
+ * @since 4.0
  */
 
  
-public abstract class GenericServlet 
-    implements Servlet, ServletConfig, java.io.Serializable
+public abstract class GenericFilter 
+    implements Filter, FilterConfig, java.io.Serializable
 {
     private static final String LSTRING_FILE = "javax.servlet.LocalStrings";
-    private static ResourceBundle lStrings =
+    private static final ResourceBundle lStrings =
         ResourceBundle.getBundle(LSTRING_FILE);
 
-    private transient ServletConfig config;
+    private transient FilterConfig config;
     
 
     /**
      *
-     * Does nothing. All of the servlet initialization
-     * is done by one of the <code>init</code> methods.
+     * <p class="changed_added_4_0">Does nothing. All of the filter initialization
+     * is done by one of the <code>init</code> methods.</p>
      *
+     * @since 4.0
      */
-    public GenericServlet() { }
+    public GenericFilter() { }
     
     
     /**
-     * Called by the servlet container to indicate to a servlet that the
-     * servlet is being taken out of service.  See {@link Servlet#destroy}.
+     * <p class="changed_added_4_0">Called by the servlet container to indicate to a filter that the
+     * filter is being taken out of service.  See {@link Filter#destroy}.</p>
      *
+     *
+     * @since 4.0
      * 
      */
+    @Override
     public void destroy() {
     }
     
     
     /**
-     * Returns a <code>String</code> containing the value of the named
+     * <p class="changed_added_4_0">Returns a <code>String</code> containing the value of the named
      * initialization parameter, or <code>null</code> if the parameter does
-     * not exist.  See {@link ServletConfig#getInitParameter}.
+     * not exist.  See {@link FilterConfig#getInitParameter}.</p>
      *
      * <p>This method is supplied for convenience. It gets the 
      * value of the named parameter from the servlet's 
@@ -132,72 +124,89 @@ public abstract class GenericServlet
      * @return String 		a <code>String</code> containing the value
      *				of the initialization parameter
      *
+     * @since 4.0
+     *
      */ 
+    @Override
     public String getInitParameter(String name) {
-        ServletConfig sc = getServletConfig();
-        if (sc == null) {
+        FilterConfig fc = getFilterConfig();
+        if (fc == null) {
             throw new IllegalStateException(
-                lStrings.getString("err.servlet_config_not_initialized"));
+                lStrings.getString("err.filter_config_not_initialized"));
         }
 
-        return sc.getInitParameter(name);
+        return fc.getInitParameter(name);
     }
     
     
    /**
-    * Returns the names of the servlet's initialization parameters 
+    * <p class="changed_added_4_0">Returns the names of the filter's initialization parameters 
     * as an <code>Enumeration</code> of <code>String</code> objects,
-    * or an empty <code>Enumeration</code> if the servlet has no
+    * or an empty <code>Enumeration</code> if the filter has no
     * initialization parameters.  See {@link
-    * ServletConfig#getInitParameterNames}.
+    * FilterConfig#getInitParameterNames}.</p>
     *
+    * <div class="changed_added_4_0">
+    * 
     * <p>This method is supplied for convenience. It gets the 
-    * parameter names from the servlet's <code>ServletConfig</code> object. 
+    * parameter names from the filter's <code>FilterConfig</code> object. 
     *
-    *
+    * </div>
+    * 
     * @return Enumeration 	an enumeration of <code>String</code>
     *				objects containing the names of 
-    *				the servlet's initialization parameters
+    *				the filter's initialization parameters
+    *
+    * @since 4.0
     */
+    @Override
     public Enumeration<String> getInitParameterNames() {
-        ServletConfig sc = getServletConfig();
-        if (sc == null) {
+        FilterConfig fc = getFilterConfig();
+        if (fc == null) {
             throw new IllegalStateException(
-                lStrings.getString("err.servlet_config_not_initialized"));
+                lStrings.getString("err.filter_config_not_initialized"));
         }
 
-        return sc.getInitParameterNames();
+        return fc.getInitParameterNames();
     }   
      
 
     /**
-     * Returns this servlet's {@link ServletConfig} object.
+     * <p class="changed_added_4_0">Returns this servlet's {@link ServletConfig} object.</p>
      *
-     * @return ServletConfig 	the <code>ServletConfig</code> object
-     *				that initialized this servlet
+     * @return FilterConfig 	the <code>FilterConfig</code> object
+     *				that initialized this filter
+     *
+     * @since 4.0
      */    
-    public ServletConfig getServletConfig() {
+    public FilterConfig getFilterConfig() {
 	return config;
     }
  
     
     /**
-     * Returns a reference to the {@link ServletContext} in which this servlet
-     * is running.  See {@link ServletConfig#getServletContext}.
+     * <p class="changed_added_4_0">Returns a reference to the {@link ServletContext} in which this filter
+     * is running.  See {@link FilterConfig#getServletContext}.</p>
      *
+     * <div class="changed_added_4_0">
+     * 
      * <p>This method is supplied for convenience. It gets the 
-     * context from the servlet's <code>ServletConfig</code> object.
+     * context from the filter's <code>FilterConfig</code> object.
      *
-     *
+     * </div>
+     * 
      * @return ServletContext 	the <code>ServletContext</code> object
-     *				passed to this servlet by the <code>init</code>
+     *				passed to this filter by the <code>init</code>
      *				method
+     *
+     * @since 4.0
      */
+    @Override
     public ServletContext getServletContext() {
-        ServletConfig sc = getServletConfig();
+        FilterConfig sc = getFilterConfig();
         if (sc == null) {
             throw new IllegalStateException(
-                lStrings.getString("err.servlet_config_not_initialized"));
+                lStrings.getString("err.filter_config_not_initialized"));
         }
 
         return sc.getServletContext();
@@ -205,59 +214,72 @@ public abstract class GenericServlet
 
 
     /**
-     * Returns information about the servlet, such as 
-     * author, version, and copyright. 
-     * By default, this method returns an empty string.  Override this method
-     * to have it return a meaningful value.  See {@link
-     * Servlet#getServletInfo}.
+     * <p class="changed_added_4_0">Called by the servlet container to indicate to a filter that
+     * it is being placed into service.  See {@link Filter#init}.</p>
+     * 
+     * <div class="changed_added_4_0">
      *
-     *
-     * @return String 		information about this servlet, by default an
-     * 				empty string
-     */    
-    public String getServletInfo() {
-	return "";
-    }
-
-
-    /**
-     * Called by the servlet container to indicate to a servlet that the
-     * servlet is being placed into service.  See {@link Servlet#init}.
-     *
-     * <p>This implementation stores the {@link ServletConfig}
+     * <p>This implementation stores the {@link FilterConfig}
      * object it receives from the servlet container for later use.
      * When overriding this form of the method, call 
      * <code>super.init(config)</code>.
+     * 
+     * </div>
      *
-     * @param config 			the <code>ServletConfig</code> object
+     * @param config 			the <code>FilterConfig</code> object
      *					that contains configuration
-     *					information for this servlet
+     *					information for this filter
      *
      * @exception ServletException 	if an exception occurs that
      *					interrupts the servlet's normal
      *					operation
      * 
      * @see 				UnavailableException
+     *
+     * @since 4.0
      */
-    public void init(ServletConfig config) throws ServletException {
+    @Override
+    public void init(FilterConfig config) throws ServletException {
 	this.config = config;
 	this.init();
     }
 
+    /**
+     * <p class="changed_added_4_0">Returns information about the filter, such as 
+     * author, version, and copyright. 
+     * By default, this method returns an empty string.  Override this method
+     * to have it return a meaningful value.  See {@link
+     * Servlet#getServletInfo}.</p>
+     *
+     *
+     * @return String 		information about this filter, by default an
+     * 				empty string
+     *
+     * @since 4.0
+     */    
+    public String getFilterInfo() {
+	return "";
+    }
 
     /**
-     * A convenience method which can be overridden so that there's no need
-     * to call <code>super.init(config)</code>.
+     * <p class="changed_added_4_0">A convenience method which can be overridden so that there's no need
+     * to call <code>super.init(config)</code>.</p>
      *
-     * <p>Instead of overriding {@link #init(ServletConfig)}, simply override
+     * <div class="changed_added_4_0">
+     * 
+     * <p>Instead of overriding {@link #init(FilterConfig)}, simply override
      * this method and it will be called by
-     * <code>GenericServlet.init(ServletConfig config)</code>.
-     * The <code>ServletConfig</code> object can still be retrieved via {@link
-     * #getServletConfig}. 
+     * <code>Genericfilter.init(FilterConfig config)</code>.
+     * The <code>FilterConfig</code> object can still be retrieved via {@link
+     * #getFilterConfig}. 
+     * 
+     * </div>
      *
      * @exception ServletException 	if an exception occurs that
      *					interrupts the servlet's
      *					normal operation
+     *
+     * @since 4.0
      */
     public void init() throws ServletException {
 
@@ -265,22 +287,24 @@ public abstract class GenericServlet
     
 
     /**
-     * Writes the specified message to a servlet log file, prepended by the
+     * Writes the specified message to a filter log file, prepended by the
      * servlet's name.  See {@link ServletContext#log(String)}.
      *
      * @param msg 	a <code>String</code> specifying
      *			the message to be written to the log file
+     *
+     * @since 4.0
      */     
     public void log(String msg) {
-	getServletContext().log(getServletName() + ": "+ msg);
+	getServletContext().log(getFilterName() + ": "+ msg);
     }
    
    
     /**
-     * Writes an explanatory message and a stack trace
+     * <p class="changed_added_4_0">Writes an explanatory message and a stack trace
      * for a given <code>Throwable</code> exception
-     * to the servlet log file, prepended by the servlet's name.
-     * See {@link ServletContext#log(String, Throwable)}.
+     * to the filter log file, prepended by the filter's name.
+     * See {@link ServletContext#log(String, Throwable)}.</p>
      *
      *
      * @param message 		a <code>String</code> that describes
@@ -288,24 +312,27 @@ public abstract class GenericServlet
      *
      * @param t			the <code>java.lang.Throwable</code> error
      * 				or exception
+     *
+     * @since 4.0
      */   
     public void log(String message, Throwable t) {
-	getServletContext().log(getServletName() + ": " + message, t);
+	getServletContext().log(getFilterName() + ": " + message, t);
     }
-    
-    
+
     /**
-     * Called by the servlet container to allow the servlet to respond to
-     * a request.  See {@link Servlet#service}.
+     * Called by the servlet container to allow the filter to respond to
+     * a request.  See {@link Filter#doFilter}.
      * 
      * <p>This method is declared abstract so subclasses, such as 
-     * <code>HttpServlet</code>, must override it.
+     * <code>HttpFilter</code>, must override it.
      *
      * @param req 	the <code>ServletRequest</code> object
      *			that contains the client's request
      *
      * @param res 	the <code>ServletResponse</code> object
      *			that will contain the servlet's response
+     * 
+     * @param chain     the <code>FilterChain</code> for invoking the next filter or the resource
      *
      * @exception ServletException 	if an exception occurs that
      *					interferes with the servlet's
@@ -313,25 +340,32 @@ public abstract class GenericServlet
      *
      * @exception IOException 		if an input or output
      *					exception occurs
+     *
+     * @since 4.0
      */
+    @Override
+    public abstract void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException;
+    
+    
 
-    public abstract void service(ServletRequest req, ServletResponse res)
-	throws ServletException, IOException;
     
 
     /**
-     * Returns the name of this servlet instance.
-     * See {@link ServletConfig#getServletName}.
+     * <p class="changed_added_4_0">Returns the name of this filter instance.
+     * See {@link FilterConfig#getFilterName}.</p>
      *
-     * @return          the name of this servlet instance
+     * @return          the name of this filter instance
+     *
+     * @since 4.0
      */
-    public String getServletName() {
-        ServletConfig sc = getServletConfig();
+    @Override
+    public String getFilterName() {
+        FilterConfig sc = getFilterConfig();
         if (sc == null) {
             throw new IllegalStateException(
                 lStrings.getString("err.servlet_config_not_initialized"));
         }
 
-        return sc.getServletName();
+        return sc.getFilterName();
     }
 }

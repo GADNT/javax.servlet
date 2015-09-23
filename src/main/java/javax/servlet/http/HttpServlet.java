@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 1997-2013 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997-2015 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -106,7 +106,7 @@ import javax.servlet.*;
  * such as files, database connections, and network 
  * connections.
  * See the
- * <a href="http://java.sun.com/Series/Tutorial/java/threads/multithreaded.html">
+ * <a href="https://docs.oracle.com/javase/tutorial/essential/concurrency/">
  * Java Tutorial on Multithreaded Programming</a> for more
  * information on handling multiple threads in a Java program.
  *
