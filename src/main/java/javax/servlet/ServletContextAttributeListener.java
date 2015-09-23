@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 1997-2010 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997-2015 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -61,7 +61,7 @@ package javax.servlet;
 import java.util.EventListener;
 
 /**
- * Interface for receiving notification events about ServletContext
+ * <span class="changed_modified_4_0">Interface</span> for receiving notification events about ServletContext
  * attribute changes.
  *
  * <p>In order to receive these notification events, the implementation
@@ -81,33 +81,42 @@ import java.util.EventListener;
 public interface ServletContextAttributeListener extends EventListener {
 
     /**
-     * Receives notification that an attribute has been added to the
+     * <span class="changed_modified_4_0">Receives</span> notification that an attribute has been added to the
      * ServletContext.
+     *
+     * <p class="changed_added_4_0">In version 4.0, a default
+     * implementation has been added that takes no action.</p>
      *
      * @param event the ServletContextAttributeEvent containing the
      * ServletContext to which the attribute was added, along with the
      * attribute name and value
      */
-    public void attributeAdded(ServletContextAttributeEvent event);
+     default public void attributeAdded(ServletContextAttributeEvent event) {}
 
     /**
-     * Receives notification that an attribute has been removed
+     * <span class="changed_modified_4_0">Receives</span> notification that an attribute has been removed
      * from the ServletContext.
+     *
+     * <p class="changed_added_4_0">In version 4.0, a default
+     * implementation has been added that takes no action.</p>
      *
      * @param event the ServletContextAttributeEvent containing the
      * ServletContext from which the attribute was removed, along with
      * the attribute name and value
      */
-    public void attributeRemoved(ServletContextAttributeEvent event);
+     default public void attributeRemoved(ServletContextAttributeEvent event) {}
 
     /*
-     * Receives notification that an attribute has been replaced
+     * <span class="changed_modified_4_0">Receives</span> notification that an attribute has been replaced
      * in the ServletContext.
+     *
+     * <p class="changed_added_4_0">In version 4.0, a default
+     * implementation has been added that takes no action.</p>
      *
      * @param event the ServletContextAttributeEvent containing the
      * ServletContext in which the attribute was replaced, along with
      * the attribute name and its old value
      */
-    public void attributeReplaced(ServletContextAttributeEvent event);
+     default public void attributeReplaced(ServletContextAttributeEvent event) {}
 }
 

@@ -60,7 +60,8 @@ package javax.servlet.http;
 
 import java.util.EventListener;
 
-/** Objects that are bound to a session may listen to container
+/** 
+ * <span class="changed_modified_4_0">Objects</span> that are bound to a session may listen to container
  * events notifying them that sessions will be passivated and that
  * session will be activated. A container that migrates session
  * between VMs or persists sessions is required to notify all
@@ -72,15 +73,26 @@ import java.util.EventListener;
 
 public interface HttpSessionActivationListener extends EventListener { 
 
-    /** Notification that the session is about to be passivated.
+    /** 
+     * <span class="changed_modified_4_0">aNotification</span> that the session is about to be passivated.
+     *
+     * <p class="changed_added_4_0">In version 4.0, a default
+     * implementation has been added that takes no action.</p>
+     *
      * @param se the {@link HttpSessionEvent} indicating the passivation
      * of the session
      */
-    public void sessionWillPassivate(HttpSessionEvent se); 
-    /** Notification that the session has just been activated.
+     default public void sessionWillPassivate(HttpSessionEvent se) {}
+
+    /** 
+     * <span class="changed_modified_4_0">Notification</span> that the session has just been activated.
+     *
+     * <p class="changed_added_4_0">In version 4.0, a default
+     * implementation has been added that takes no action.</p>
+     *
      * @param se the {@link HttpSessionEvent} indicating the activation
      * of the session
      */
-    public void sessionDidActivate(HttpSessionEvent se);
+     default public void sessionDidActivate(HttpSessionEvent se) {}
 } 
 

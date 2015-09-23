@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2008-2010 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2008-2015 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -44,17 +44,18 @@ import java.io.IOException;
 import java.util.EventListener;
 
 /**
- * Listener that will be notified in the event that an asynchronous
- * operation initiated on a ServletRequest to which the listener had been 
- * added has completed, timed out, or resulted in an error.
+ * <p><span class="changed_modified_4_0">Listener</span> that will be
+ * notified in the event that an asynchronous operation initiated on a
+ * ServletRequest to which the listener had been added has completed,
+ * timed out, or resulted in an error.</p>
  *
  * @since Servlet 3.0
  */
 public interface AsyncListener extends EventListener {
     
     /**
-     * Notifies this AsyncListener that an asynchronous operation
-     * has been completed.
+     * <p><span class="changed_modified_4_0">Notifies</span> this
+     * AsyncListener that an asynchronous operation has been completed.</p>
      * 
      * <p>The {@link AsyncContext} corresponding to the asynchronous
      * operation that has been completed may be obtained by calling
@@ -69,18 +70,21 @@ public interface AsyncListener extends EventListener {
      * {@link AsyncEvent#getSuppliedResponse getSuppliedResponse},
      * respectively, on the given <tt>event</tt>.
      *
+     * <p class="changed_added_4_0">In version 4.0, a default
+     * implementation has been added that takes no action.</p>
+     *
      * @param event the AsyncEvent indicating that an asynchronous
      * operation has been completed
      *
      * @throws IOException if an I/O related error has occurred during the
      * processing of the given AsyncEvent
      */
-    public void onComplete(AsyncEvent event) throws IOException;
+     default public void onComplete(AsyncEvent event) throws IOException {}
 
 
     /**
-     * Notifies this AsyncListener that an asynchronous operation
-     * has timed out.
+     * <p><span class="changed_modified_4_0">Notifies</span> this
+     * AsyncListener that an asynchronous operation has timed out.</p>
      * 
      * <p>The {@link AsyncContext} corresponding to the asynchronous
      * operation that has timed out may be obtained by calling
@@ -95,18 +99,22 @@ public interface AsyncListener extends EventListener {
      * {@link AsyncEvent#getSuppliedResponse getSuppliedResponse},
      * respectively, on the given <tt>event</tt>.
      *
+     * <p class="changed_added_4_0">In version 4.0, a default
+     * implementation has been added that takes no action.</p>
+     *
      * @param event the AsyncEvent indicating that an asynchronous
      * operation has timed out
      *
      * @throws IOException if an I/O related error has occurred during the
      * processing of the given AsyncEvent
      */
-    public void onTimeout(AsyncEvent event) throws IOException;
+     default public void onTimeout(AsyncEvent event) throws IOException {}
 
 
     /**
-     * Notifies this AsyncListener that an asynchronous operation 
-     * has failed to complete.
+     * <p><span class="changed_modified_4_0">Notifies</span> this
+     * AsyncListener that an asynchronous operation has failed to
+     * complete.</p>
      * 
      * <p>The {@link AsyncContext} corresponding to the asynchronous
      * operation that failed to complete may be obtained by calling
@@ -121,19 +129,23 @@ public interface AsyncListener extends EventListener {
      * {@link AsyncEvent#getSuppliedResponse getSuppliedResponse},
      * respectively, on the given <tt>event</tt>.
      *
+     * <p class="changed_added_4_0">In version 4.0, a default
+     * implementation has been added that takes no action.</p>
+     *
      * @param event the AsyncEvent indicating that an asynchronous
      * operation has failed to complete
      *
      * @throws IOException if an I/O related error has occurred during the
      * processing of the given AsyncEvent
      */
-    public void onError(AsyncEvent event) throws IOException;
+     default public void onError(AsyncEvent event) throws IOException {}
 
 
     /**
-     * Notifies this AsyncListener that a new asynchronous cycle is being
-     * initiated via a call to one of the {@link ServletRequest#startAsync}
-     * methods.
+     * <p><span class="changed_modified_4_0">Notifies</span> this
+     * AsyncListener that a new asynchronous cycle is being initiated
+     * via a call to one of the {@link ServletRequest#startAsync}
+     * methods.</p>
      *
      * <p>The {@link AsyncContext} corresponding to the asynchronous
      * operation that is being reinitialized may be obtained by calling
@@ -153,12 +165,15 @@ public interface AsyncListener extends EventListener {
      * to {@link AsyncContext#addListener}) with the AsyncContext that
      * is delivered as part of the given AsyncEvent.
      *
+     * <p class="changed_added_4_0">In version 4.0, a default
+     * implementation has been added that takes no action.</p>
+     *
      * @param event the AsyncEvent indicating that a new asynchronous
      * cycle is being initiated
      *
      * @throws IOException if an I/O related error has occurred during the
      * processing of the given AsyncEvent
      */
-    public void onStartAsync(AsyncEvent event) throws IOException;     
+     default public void onStartAsync(AsyncEvent event) throws IOException {}
 
 }

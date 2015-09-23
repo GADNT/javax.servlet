@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 1997-2010 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997-2015 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -61,7 +61,7 @@ package javax.servlet;
 import java.util.EventListener;
 
 /** 
- * Interface for receiving notification events about ServletContext
+ * <span class="changed_modified_4_0">Interface</span> for receiving notification events about ServletContext
  * lifecycle changes.
  *
  * <p>In order to receive these notification events, the implementation
@@ -82,29 +82,35 @@ import java.util.EventListener;
 public interface ServletContextListener extends EventListener {
 
     /**
-     * Receives notification that the web application initialization
+     * <span class="changed_modified_4_0">Receives</span> notification that the web application initialization
      * process is starting.
      *
      * <p>All ServletContextListeners are notified of context
      * initialization before any filters or servlets in the web
      * application are initialized.
      *
+     * <p class="changed_added_4_0">In version 4.0, a default
+     * implementation has been added that takes no action.</p>
+     *
      * @param sce the ServletContextEvent containing the ServletContext
      * that is being initialized
      */
-    public void contextInitialized(ServletContextEvent sce);
+     default public void contextInitialized(ServletContextEvent sce) {}
 
     /**
-     * Receives notification that the ServletContext is about to be
+     * <span class="changed_modified_4_0">Receives</span> notification that the ServletContext is about to be
      * shut down.
      *
      * <p>All servlets and filters will have been destroyed before any
      * ServletContextListeners are notified of context
      * destruction.
      *
+     * <p class="changed_added_4_0">In version 4.0, a default
+     * implementation has been added that takes no action.</p>
+     *
      * @param sce the ServletContextEvent containing the ServletContext
      * that is being destroyed
      */
-    public void contextDestroyed(ServletContextEvent sce);
+     default public void contextDestroyed(ServletContextEvent sce) {}
 }
 

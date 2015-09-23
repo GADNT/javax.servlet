@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 1997-2010 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997-2015 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -61,7 +61,7 @@ package javax.servlet.http;
 import java.util.EventListener;
 
 /** 
- * Interface for receiving notification events about HttpSession
+ * <span class="changed_modified_4_0">Interface</span> for receiving notification events about HttpSession
  * lifecycle changes.
  *
  * <p>In order to receive these notification events, the implementation
@@ -82,18 +82,24 @@ import java.util.EventListener;
 public interface HttpSessionListener extends EventListener {
     
     /** 
-     * Receives notification that a session has been created.
+     * <span class="changed_modified_4_0">Receives</span> notification that a session has been created.
+     *
+     * <p class="changed_added_4_0">In version 4.0, a default
+     * implementation has been added that takes no action.</p>
      *
      * @param se the HttpSessionEvent containing the session
      */
-    public void sessionCreated(HttpSessionEvent se);
+     default public void sessionCreated(HttpSessionEvent se) {}
     
     /** 
-     * Receives notification that a session is about to be invalidated.
+     * <span class="changed_modified_4_0">Receives</span> notification that a session is about to be invalidated.
+     *
+     * <p class="changed_added_4_0">In version 4.0, a default
+     * implementation has been added that takes no action.</p>
      *
      * @param se the HttpSessionEvent containing the session
      */
-    public void sessionDestroyed(HttpSessionEvent se);
+     default public void sessionDestroyed(HttpSessionEvent se) {}
     
 }
 

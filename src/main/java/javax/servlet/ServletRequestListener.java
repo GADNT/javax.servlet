@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 1997-2010 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997-2015 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -61,7 +61,7 @@ package javax.servlet;
 import java.util.EventListener;
 
 /**
- * Interface for receiving notification events about requests coming
+ * <span class="changed_modified_4_0">Interface</span> for receiving notification events about requests coming
  * into and going out of scope of a web application.
  *
  * <p>A ServletRequest is defined as coming into scope of a web
@@ -86,20 +86,26 @@ import java.util.EventListener;
 public interface ServletRequestListener extends EventListener {
 
     /**
-     * Receives notification that a ServletRequest is about to go out
+     * <span class="changed_modified_4_0">Receives</span> notification that a ServletRequest is about to go out
      * of scope of the web application.
      *
-     * @param sre the ServletRequestEvent containing the ServletRequest
-     * and the ServletContext representing the web application
-     */
-    public void requestDestroyed(ServletRequestEvent sre);
-
-    /**
-     * Receives notification that a ServletRequest is about to come
-     * into scope of the web application.
+     * <p class="changed_added_4_0">In version 4.0, a default
+     * implementation has been added that takes no action.</p>
      *
      * @param sre the ServletRequestEvent containing the ServletRequest
      * and the ServletContext representing the web application
      */
-    public void requestInitialized(ServletRequestEvent sre);
+     default public void requestDestroyed(ServletRequestEvent sre) {}
+
+    /**
+     * <span class="changed_modified_4_0">Receives</span> notification that a ServletRequest is about to come
+     * into scope of the web application.
+     *
+     * <p class="changed_added_4_0">In version 4.0, a default
+     * implementation has been added that takes no action.</p>
+     *
+     * @param sre the ServletRequestEvent containing the ServletRequest
+     * and the ServletContext representing the web application
+     */
+     default public void requestInitialized(ServletRequestEvent sre) {}
 }

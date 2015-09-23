@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 1997-2010 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997-2015 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -61,7 +61,7 @@ package javax.servlet.http;
 import java.util.EventListener;
 
 /**
- * Interface for receiving notification events about HttpSession
+ * <span class="changed_modified_4_0">Interface</span> for receiving notification events about HttpSession
  * attribute changes.
  *
  * <p>In order to receive these notification events, the implementation
@@ -79,31 +79,40 @@ import java.util.EventListener;
 public interface HttpSessionAttributeListener extends EventListener {
 
     /**
-     * Receives notification that an attribute has been added to a
+     * <span class="changed_modified_4_0">Receives</span> notification that an attribute has been added to a
      * session.
+     *
+     * <p class="changed_added_4_0">In version 4.0, a default
+     * implementation has been added that takes no action.</p>
      *
      * @param event the HttpSessionBindingEvent containing the session
      * and the name and value of the attribute that was added
      */
-    public void attributeAdded(HttpSessionBindingEvent event);
+     default public void attributeAdded(HttpSessionBindingEvent event) {}
 
     /**
-     * Receives notification that an attribute has been removed from a
+     * <span class="changed_modified_4_0">Receives</span> notification that an attribute has been removed from a
      * session.
+     *
+     * <p class="changed_added_4_0">In version 4.0, a default
+     * implementation has been added that takes no action.</p>
      *
      * @param event the HttpSessionBindingEvent containing the session
      * and the name and value of the attribute that was removed
      */
-    public void attributeRemoved(HttpSessionBindingEvent event);
+     default public void attributeRemoved(HttpSessionBindingEvent event) {}
 
     /**
-     * Receives notification that an attribute has been replaced in a
+     * <span class="changed_modified_4_0">Receives</span> notification that an attribute has been replaced in a
      * session.
+     *
+     * <p class="changed_added_4_0">In version 4.0, a default
+     * implementation has been added that takes no action.</p>
      *
      * @param event the HttpSessionBindingEvent containing the session
      * and the name and (old) value of the attribute that was replaced
      */
-    public void attributeReplaced(HttpSessionBindingEvent event);
+     default public void attributeReplaced(HttpSessionBindingEvent event) {}
 
 }
 

@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 1997-2010 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997-2015 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -65,7 +65,7 @@ import java.util.EventListener;
  
 
 /**
- * Causes an object to be notified when it is bound to
+ * <span class="changed_modified_4_0">Causes</span> an object to be notified when it is bound to
  * or unbound from a session. The object is notified
  * by an {@link HttpSessionBindingEvent} object. This may be as a result
  * of a servlet programmer explicitly unbinding an attribute from a session,
@@ -85,8 +85,11 @@ public interface HttpSessionBindingListener extends EventListener {
 
     /**
      *
-     * Notifies the object that it is being bound to
+     * <span class="changed_modified_4_0">Notifies</span> the object that it is being bound to
      * a session and identifies the session.
+     *
+     * <p class="changed_added_4_0">In version 4.0, a default
+     * implementation has been added that takes no action.</p>
      *
      * @param event		the event that identifies the
      *				session 
@@ -95,14 +98,17 @@ public interface HttpSessionBindingListener extends EventListener {
      *
      */ 
 
-    public void valueBound(HttpSessionBindingEvent event);
+     default public void valueBound(HttpSessionBindingEvent event) {}
     
     
 
     /**
      *
-     * Notifies the object that it is being unbound
+     * <span class="changed_modified_4_0">Notifies</span> the object that it is being unbound
      * from a session and identifies the session.
+     *
+     * <p class="changed_added_4_0">In version 4.0, a default
+     * implementation has been added that takes no action.</p>
      *
      * @param event		the event that identifies
      *				the session 
@@ -111,7 +117,7 @@ public interface HttpSessionBindingListener extends EventListener {
      *
      */
 
-    public void valueUnbound(HttpSessionBindingEvent event);
+     default public void valueUnbound(HttpSessionBindingEvent event) {}
     
     
 }

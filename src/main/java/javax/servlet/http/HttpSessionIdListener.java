@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2012 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2012-2015 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -44,7 +44,7 @@ package javax.servlet.http;
 import java.util.EventListener;
 
 /**
- * Interface for receiving notification events about HttpSession
+ * <span class="changed_modified_4_0">Interface</span> for receiving notification events about HttpSession
  * id changes.
  *
  * <p>In order to receive these notification events, the implementation
@@ -62,14 +62,17 @@ import java.util.EventListener;
 public interface HttpSessionIdListener extends EventListener {
 
     /**
-     * Receives notification that session id has been changed in a
+     * <span class="changed_modified_4_0">Receives</span> notification that session id has been changed in a
      * session.
+     *
+     * <p class="changed_added_4_0">In version 4.0, a default
+     * implementation has been added that takes no action.</p>
      *
      * @param event the HttpSessionBindingEvent containing the session
      * and the name and (old) value of the attribute that was replaced
      *
      * @param oldSessionId the old session id
      */
-    public void sessionIdChanged(HttpSessionEvent event, String oldSessionId);
+     default public void sessionIdChanged(HttpSessionEvent event, String oldSessionId) {}
 
 }

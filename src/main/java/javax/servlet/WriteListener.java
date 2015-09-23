@@ -46,7 +46,7 @@ import java.util.EventListener;
 
 /**
  *
- * Callback notification mechanism that signals to the developer it's possible
+ * <span class="changed_modified_4_0">Callback</span> notification mechanism that signals to the developer it's possible
  * to write content without blocking.
  *
  * @since Servlet 3.1
@@ -54,21 +54,27 @@ import java.util.EventListener;
 public interface WriteListener extends EventListener {
 
     /**
-     * When an instance of the WriteListener is registered with a {@link ServletOutputStream},
+     * <span class="changed_modified_4_0">When</span> an instance of the WriteListener is registered with a {@link ServletOutputStream},
      * this method will be invoked by the container the first time when it is possible
      * to write data. Subsequently the container will invoke this method if and only
      * if {@link javax.servlet.ServletOutputStream#isReady()} method
      * has been called and has returned <code>false</code>.
      *
+     * <p class="changed_added_4_0">In version 4.0, a default
+     * implementation has been added that takes no action.</p>
+     *
      * @throws IOException if an I/O related error has occurred during processing
      */
-    public void onWritePossible() throws IOException;
+     default public void onWritePossible() throws IOException {}
 
     /**
-     * Invoked when an error occurs writing data using the non-blocking APIs.
+     * <span class="changed_modified_4_0">Invoked</span> when an error occurs writing data using the non-blocking APIs.
+     *
+     * <p class="changed_added_4_0">In version 4.0, a default
+     * implementation has been added that takes no action.</p>
      *
      * @param t the throwable to indicate why the write operation failed
      */
-    public void onError(final Throwable t);
+     default public void onError(final Throwable t) {}
 
 }
