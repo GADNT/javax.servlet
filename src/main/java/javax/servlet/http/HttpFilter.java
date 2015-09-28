@@ -42,7 +42,6 @@
 package javax.servlet.http;
 
 import java.io.IOException;
-import java.util.ResourceBundle;
 import javax.servlet.FilterChain;
 import javax.servlet.GenericFilter;
 import javax.servlet.ServletException;
@@ -94,15 +93,16 @@ public abstract class HttpFilter extends GenericFilter
      * container each time a request/response pair is passed through the
      * chain due to a client request for a resource at the end of the chain.
      * The FilterChain passed in to this method allows the Filter to pass
-     * on the request and response to the next entity in the chain.</p>
+     * on the request and response to the next entity in the chain.  There's no need to
+     * override this method.</p>
      * 
      * <div class="changed_added_4_0">
      * 
      * <p>The default implementation inspects the incoming {@code req} and {@code res}
      * objects to determine if they are instances of {@link HttpServletRequest}
-     * and {@link HttpServletResponse}, respectively.  If so, they are cast
-     * as such and the {@link #doFilter(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, javax.servlet.FilterChain)}
-     * method is called.  Otherwise, no action is taken.</p>
+     * and {@link HttpServletResponse}, respectively.  If not, a {@link ServletException} is thrown.
+     * Otherwise, the protected {@link #doFilter(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, javax.servlet.FilterChain)}
+     * method is called.</p>
      *
      * </div>
      * 
@@ -116,19 +116,24 @@ public abstract class HttpFilter extends GenericFilter
      * 
      * @param chain     the <code>FilterChain</code> for invoking the next filter or the resource
      * 
-     * @exception IOException   if an input or output error is 
+     * @throws IOException   if an input or output error is 
      *                              detected when the filter handles
      *                              the request
      *
-     * @exception ServletException  if the request for the could not be handled
+     * @throws ServletException  if the request for the could not be handled or 
+     * either parameter is not an instance of the respective {@link HttpServletRequest}
+     * or {@link HttpServletResponse}.
      *
      * @since 4.0
      */
     @Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
-        if (req instanceof HttpServletRequest && res instanceof HttpServletResponse) {
-            this.doFilter((HttpServletRequest)req, (HttpServletResponse)res, chain);
+        if (!(req instanceof HttpServletRequest &&
+                res instanceof HttpServletResponse)) {
+            throw new ServletException("non-HTTP request or response");
         }
+
+        this.doFilter((HttpServletRequest)req, (HttpServletResponse)res, chain);
     }
     
     /**
@@ -155,15 +160,15 @@ public abstract class HttpFilter extends GenericFilter
      * 
      * @param chain     the <code>FilterChain</code> for invoking the next filter or the resource
      * 
-     * @exception IOException   if an input or output error is 
+     * @throws IOException   if an input or output error is 
      *                              detected when the filter handles
      *                              the request
      *
-     * @exception ServletException  if the request for the could not be handled
+     * @throws ServletException  if the request for the could not be handled
      *
      * @since 4.0
      */
-    public void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
+    protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
         chain.doFilter(req, res);
     }
     

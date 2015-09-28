@@ -245,23 +245,6 @@ public abstract class GenericFilter
     }
 
     /**
-     * <p class="changed_added_4_0">Returns information about the filter, such as 
-     * author, version, and copyright. 
-     * By default, this method returns an empty string.  Override this method
-     * to have it return a meaningful value.  See {@link
-     * Servlet#getServletInfo}.</p>
-     *
-     *
-     * @return String 		information about this filter, by default an
-     * 				empty string
-     *
-     * @since 4.0
-     */    
-    public String getFilterInfo() {
-	return "";
-    }
-
-    /**
      * <p class="changed_added_4_0">A convenience method which can be overridden so that there's no need
      * to call <code>super.init(config)</code>.</p>
      *
