@@ -252,7 +252,7 @@ public abstract class GenericFilter
      * 
      * <p>Instead of overriding {@link #init(FilterConfig)}, simply override
      * this method and it will be called by
-     * <code>Genericfilter.init(FilterConfig config)</code>.
+     * <code>GenericFilter.init(FilterConfig config)</code>.
      * The <code>FilterConfig</code> object can still be retrieved via {@link
      * #getFilterConfig}. 
      * 
