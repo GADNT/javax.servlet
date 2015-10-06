@@ -61,9 +61,7 @@ import java.util.ResourceBundle;
  * <p><code>GenericFilter</code> makes writing filters
  * easier. It provides simple versions of the lifecycle methods 
  * <code>init</code> and <code>destroy</code> and of the methods 
- * in the <code>FilterConfig</code> interface. <code>GenericFilter</code>
- * also implements the <code>log</code> method, declared in the
- * <code>ServletContext</code> interface. 
+ * in the <code>FilterConfig</code> interface.
  *
  * <p>To write a generic filter, you need only
  * override the abstract <code>doFilter</code> method. 
@@ -268,40 +266,6 @@ public abstract class GenericFilter
 
     }
     
-
-    /**
-     * Writes the specified message to a filter log file, prepended by the
-     * servlet's name.  See {@link ServletContext#log(String)}.
-     *
-     * @param msg 	a <code>String</code> specifying
-     *			the message to be written to the log file
-     *
-     * @since 4.0
-     */     
-    public void log(String msg) {
-	getServletContext().log(getFilterName() + ": "+ msg);
-    }
-   
-   
-    /**
-     * <p class="changed_added_4_0">Writes an explanatory message and a stack trace
-     * for a given <code>Throwable</code> exception
-     * to the filter log file, prepended by the filter's name.
-     * See {@link ServletContext#log(String, Throwable)}.</p>
-     *
-     *
-     * @param message 		a <code>String</code> that describes
-     *				the error or exception
-     *
-     * @param t			the <code>java.lang.Throwable</code> error
-     * 				or exception
-     *
-     * @since 4.0
-     */   
-    public void log(String message, Throwable t) {
-	getServletContext().log(getFilterName() + ": " + message, t);
-    }
-
     /**
      * Called by the servlet container to allow the filter to respond to
      * a request.  See {@link Filter#doFilter}.
