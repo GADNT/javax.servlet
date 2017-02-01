@@ -156,7 +156,7 @@ public class HttpServletRequestWrapper extends ServletRequestWrapper implements 
     }
 
     /**
-     * <p class="changed_added_4_0">The default behavior of this method is to
+     * <p>The default behavior of this method is to
      * return getMapping() on the wrapped request object.</p>
      */
      @Override

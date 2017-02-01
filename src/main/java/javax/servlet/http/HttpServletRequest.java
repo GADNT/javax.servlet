@@ -252,13 +252,12 @@ public interface HttpServletRequest extends ServletRequest {
     public int getIntHeader(String name);
 
     /**
-     * <p class="changed_added_4_0">Return the {@link Mapping} by which this
+     * <p>Return the {@link Mapping} by which this
      * {@code HttpServletRequest} was invoked.  Each invocation of this method
      * must return a fresh instance of {@code Mapping}.  The implementation must
      * retain no reference to the returned {@code Mapping}.  Servlet 4.0 compliant
      * implementations must override this method.</p>
      * 
-     * <div class="changed_added_4_0">
      * <p>For compatibility with older
      * runtimes, a default implementation must be provided that returns a new
      * {@code Mapping} instance that returns {@link MappingMatch#UNKNOWN} from 
@@ -267,8 +266,6 @@ public interface HttpServletRequest extends ServletRequest {
      * the argument is null or not a {@code Mapping} and return {@code true} if
      * and only if all of its values are == equivalent to their returns from 
      * this instance.  The {@code hashCode} method must return {@code 44356184}.</p>
-     * </div>
-     * 
      * @since 4.0
      * 
      * @return A fresh instance of {@code Mapping} describing the manner in which

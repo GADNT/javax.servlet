@@ -41,7 +41,7 @@
 package javax.servlet.http;
 
 /**
- * <p class="changed_added_4_0">Allows runtime discovery of the manner in 
+ * <p>Allows runtime discovery of the manner in 
  * which the current {@link HttpServletRequest} was invoked.  Invoking any of 
  * the methods must not block the caller.  The implementation must be thread
  * safe.  Instances are returned from {@link HttpServletRequest#getMapping}.</p>
@@ -53,7 +53,7 @@ public interface Mapping {
 
     
     /**
-     * <p class="changed_added_4_0">Return the actual value that caused this request
+     * <p>Return the actual value that caused this request
      * to be matched or the empty String if not known or not knowable.</p> 
      * 
      * @return the match.
@@ -63,7 +63,7 @@ public interface Mapping {
     public String getMatchValue();
 
     /**
-     * <p class="changed_added_4_0">Return the String representation for the
+     * <p>Return the String representation for the
      * {@code url-pattern} for this mapping or the empty String if not known
      * or not knowable.</p>
      * 
@@ -76,7 +76,7 @@ public interface Mapping {
     public String getPattern();
 
     /**
-     * <p class="changed_added_4_0">Return the {@link MappingMatch} for this 
+     * <p>Return the {@link MappingMatch} for this 
      * instance, or {@link MappingMatch#UNKNOWN} if not known or not knowable.</p> 
      * 
      * @return the {@link MappingMatch} for this instance, or {@link MappingMatch#UNKNOWN}
