@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 1997-2015 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997-2017 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -61,9 +61,9 @@ package javax.servlet;
 import java.io.IOException;
 
 /**
- * A filter is an object that performs filtering tasks on either the
- * request to a resource (a servlet or static content), or on the response
- * from a resource, or both.
+ * <p>A filter is an object that performs 
+ * filtering tasks on either the request to a resource (a servlet or static content), or on the response
+ * from a resource, or both.</p>
  * 
  * <p>Filters perform filtering in the <code>doFilter</code> method.
  * Every Filter has access to a FilterConfig object from which it can obtain
@@ -92,27 +92,30 @@ import java.io.IOException;
 public interface Filter {
 
     /** 
-     * Called by the web container to indicate to a filter that it is
-     * being placed into service.
+     * <p>Called by the web container
+     * to indicate to a filter that it is being placed into service.</p>
      *
      * <p>The servlet container calls the init
      * method exactly once after instantiating the filter. The init
      * method must complete successfully before the filter is asked to do any
-     * filtering work.
+     * filtering work.</p>
      * 
      * <p>The web container cannot place the filter into service if the init
-     * method either
+     * method either</p>
      * <ol>
      * <li>Throws a ServletException
      * <li>Does not return within a time period defined by the web container
      * </ol>
+     * 
+     * @implSpec
+     * The default implementation takes no action.
      *
      * @param filterConfig a <code>FilterConfig</code> object containing the
      *                     filter's configuration and initialization parameters 
      * @throws ServletException if an exception has occurred that interferes with
      *                          the filter's normal operation
      */
-    public void init(FilterConfig filterConfig) throws ServletException;
+    default public void init(FilterConfig filterConfig) throws ServletException {}
 	
 	
     /**
@@ -158,18 +161,22 @@ public interface Filter {
 
 
     /**
-     * Called by the web container to indicate to a filter that it is being
-     * taken out of service.
+     * <p>Called by the web container 
+     * to indicate to a filter that it is being
+     * taken out of service.</p>
      *
      * <p>This method is only called once all threads within the filter's
      * doFilter method have exited or after a timeout period has passed.
      * After the web container calls this method, it will not call the
-     * doFilter method again on this instance of the filter.
+     * doFilter method again on this instance of the filter.</p>
      *
      * <p>This method gives the filter an opportunity to clean up any
      * resources that are being held (for example, memory, file handles,
      * threads) and make sure that any persistent state is synchronized
-     * with the filter's current state in memory.
+     * with the filter's current state in memory.</p>
+     * 
+     * @implSpec
+     * The default implementation takes no action.
      */
-    public void destroy();
+    default public void destroy() {}
 }
