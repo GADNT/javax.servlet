@@ -258,61 +258,17 @@ public interface HttpServletRequest extends ServletRequest {
      * retain no reference to the returned {@code Mapping}.  Servlet 4.0 compliant
      * implementations must override this method.</p>
      * 
-     * <p>For compatibility with older
-     * runtimes, a default implementation must be provided that returns a new
-     * {@code Mapping} instance that returns {@link MappingMatch#UNKNOWN} from 
-     * {@link Mapping#getMatchType}, and the empty String from the remaining methods on {@link Mapping}.
-     * The {@code equals} method must be implemented to return {@code false} if
-     * the argument is null or not a {@code Mapping} and return {@code true} if
-     * and only if all of its values are == equivalent to their returns from 
-     * this instance.  The {@code hashCode} method must return {@code 44356184}.</p>
-     * @since 4.0
-     * 
+     * @implSpec
+     * The default implementation returns null.
+     *
      * @return A fresh instance of {@code Mapping} describing the manner in which
      * the current request was invoked.
+     * 
+     * @since 4.0
      */
     
     default public Mapping getMapping() {
-        return new Mapping() {
-
-            @Override
-            public MappingMatch getMatchType() {
-                return MappingMatch.UNKNOWN;
-            }
-
-            @Override
-            public String getMatchValue() {
-                return "";
-            }
-
-            @Override
-            public String getPattern() {
-                return "";
-            }
-
-            @Override
-            public String toString() {
-                return MappingMatch.UNKNOWN.toString();
-            }
-
-            @Override
-            public boolean equals(Object obj) {
-                if (null == obj || !(obj instanceof Mapping)) {
-                    return false;
-                }
-                Mapping other = (Mapping) obj;
-                return (this.getMatchType() == other.getMatchType() &&
-                        this.getMatchValue() == other.getMatchValue() && // NOPMD
-                        this.getPattern() == other.getPattern()
-                        );
-            }
-
-            @Override
-            public int hashCode() {
-                return 44356184;
-            }
-            
-        };
+        return null;
     }
     
     /**
