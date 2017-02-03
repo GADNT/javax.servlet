@@ -259,7 +259,9 @@ public interface HttpServletRequest extends ServletRequest {
      * implementations must override this method.</p>
      * 
      * @implSpec
-     * The default implementation returns null.
+     * The default implementation returns a {@code Mapping} that returns the
+     * empty string for the match value and pattern and {@link MappingMatch#UNKNOWN}
+     * for the match type.
      *
      * @return A fresh instance of {@code Mapping} describing the manner in which
      * the current request was invoked.
@@ -268,7 +270,32 @@ public interface HttpServletRequest extends ServletRequest {
      */
     
     default public Mapping getMapping() {
-        return null;
+        return new Mapping() {
+            @Override
+            public String getMatchValue() {
+                return "";
+            }
+
+            @Override
+            public String getPattern() {
+                return "";
+            }
+
+            @Override
+            public MappingMatch getMatchType() {
+                return MappingMatch.UNKNOWN;
+            }
+
+            @Override
+            public String toString() {
+                return "Mapping{" + "matchValue=" + getMatchValue() + 
+                        ", pattern=" + getPattern() + 
+                        ", mappingMatch=" + getMatchType() + '}';
+            }
+            
+            
+            
+        };
     }
     
     /**

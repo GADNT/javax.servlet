@@ -70,12 +70,6 @@ public enum MappingMatch {
     EXTENSION,
     /**
      * <p>This is used when the mapping was achieved
-     * by one of the default mappings as specified in the Servlet specification
-     * document section "Implicit Mappings".</p>
-     */
-    IMPLICIT,
-    /**
-     * <p>This is used when the mapping was achieved
      * using a path, such as "{@code /faces/*}".</p>
      */
     PATH,
