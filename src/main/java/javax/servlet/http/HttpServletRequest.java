@@ -252,11 +252,12 @@ public interface HttpServletRequest extends ServletRequest {
     public int getIntHeader(String name);
 
     /**
-     * <p>Return the {@link Mapping} by which this
-     * {@code HttpServletRequest} was invoked.  Each invocation of this method
-     * must return a fresh instance of {@code Mapping}.  The implementation must
-     * retain no reference to the returned {@code Mapping}.  Servlet 4.0 compliant
-     * implementations must override this method.</p>
+     * <p>If called from a {@code Servlet}, return the {@link Mapping} by which this
+     * {@code HttpServletRequest} was invoked, otherwise return a {@link Mapping}
+     * equivalent to the one specified for the default implementation.  Each 
+     * invocation of this method must return a fresh instance of {@code Mapping}.  
+     * The implementation must retain no reference to the returned {@code Mapping}.  
+     * Servlet 4.0 compliant implementations must override this method.</p>
      * 
      * @implSpec
      * The default implementation returns a {@code Mapping} that returns the
