@@ -1,1 +1,5 @@
+2017-02-08 merge r64464 through 64522
+
+svn merge -r 64464:64522 https://svn.java.net/svn/glassfish~svn/trunk/api/javaee-api/javax.servlet
+
 2017-02-01 merge r64089 through r64463
