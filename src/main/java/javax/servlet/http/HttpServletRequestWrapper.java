@@ -160,8 +160,8 @@ public class HttpServletRequestWrapper extends ServletRequestWrapper implements 
      * return getMapping() on the wrapped request object.</p>
      */
      @Override
-     public Mapping getMapping() {
-        return this._getHttpServletRequest().getMapping();
+     public ServletMapping getServletMapping() {
+        return this._getHttpServletRequest().getServletMapping();
     }
 
     /**

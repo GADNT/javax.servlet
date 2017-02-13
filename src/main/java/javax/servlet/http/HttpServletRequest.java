@@ -252,10 +252,10 @@ public interface HttpServletRequest extends ServletRequest {
     public int getIntHeader(String name);
 
     /**
-     * <p>If called from a {@code Servlet}, return the {@link Mapping} by which this
-     * {@code HttpServletRequest} was invoked, otherwise return a {@link Mapping}
-     * equivalent to the one specified for the default implementation.  Each 
-     * invocation of this method must return a fresh instance of {@code Mapping}.  
+     * <p>Return the {@link ServletMapping} by which the {@link HttpServlet} for
+     * this {@code HttpServletRequest} was invoked.  The mappings for any
+     * applicable {@link javax.servlet.Filter}s are not indicated in the result.
+     * Each invocation of this method must return a fresh instance of {@code Mapping}.  
      * The implementation must retain no reference to the returned {@code Mapping}.  
      * Servlet 4.0 compliant implementations must override this method.</p>
      * 
@@ -270,8 +270,8 @@ public interface HttpServletRequest extends ServletRequest {
      * @since 4.0
      */
     
-    default public Mapping getMapping() {
-        return new Mapping() {
+    default public ServletMapping getServletMapping() {
+        return new ServletMapping() {
             @Override
             public String getMatchValue() {
                 return "";
@@ -283,15 +283,15 @@ public interface HttpServletRequest extends ServletRequest {
             }
 
             @Override
-            public MappingMatch getMatchType() {
+            public MappingMatch getMappingMatch() {
                 return MappingMatch.UNKNOWN;
             }
 
             @Override
             public String toString() {
-                return "Mapping{" + "matchValue=" + getMatchValue() + 
+                return "ServletMapping{" + "matchValue=" + getMatchValue() + 
                         ", pattern=" + getPattern() + 
-                        ", mappingMatch=" + getMatchType() + '}';
+                        ", mappingMatch=" + getMappingMatch() + '}';
             }
             
             
