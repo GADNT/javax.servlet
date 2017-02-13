@@ -75,6 +75,19 @@ public interface ServletMapping {
      * @since 4.0
      */
     public String getPattern();
+    
+    /**
+     * <p>Return the String representation for the
+     * {@code servlet-name} for this mapping or the empty String if not known
+     * or not knowable.</p>
+     * 
+     * @return the String representation for the
+     * {@code servlet-name} for this mapping or the empty String if not known
+     * or not knowable. 
+     * 
+     * @since 4.0
+     */
+    public String getServletName();
 
     /**
      * <p>Return the {@link MappingMatch} for this 

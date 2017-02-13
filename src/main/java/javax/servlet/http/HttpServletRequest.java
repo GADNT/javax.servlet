@@ -283,15 +283,20 @@ public interface HttpServletRequest extends ServletRequest {
             }
 
             @Override
+            public String getServletName() {
+                return "";
+            }
+
+            @Override
             public MappingMatch getMappingMatch() {
                 return MappingMatch.UNKNOWN;
             }
 
             @Override
             public String toString() {
-                return "ServletMapping{" + "matchValue=" + getMatchValue() + 
-                        ", pattern=" + getPattern() + 
-                        ", mappingMatch=" + getMappingMatch() + '}';
+                return "MappingImpl{" + "matchValue=" + getMatchValue()
+                        + ", pattern=" + getPattern() + ", servletName=" 
+                        + getServletName() + ", mappingMatch=" + getMappingMatch() + '}';
             }
             
             
