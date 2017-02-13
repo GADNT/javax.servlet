@@ -60,6 +60,7 @@ package javax.servlet.http;
 
 import java.io.IOException;
 import java.util.*;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 
@@ -255,6 +256,18 @@ public interface HttpServletRequest extends ServletRequest {
      * <p>Return the {@link ServletMapping} by which the {@link HttpServlet} for
      * this {@code HttpServletRequest} was invoked.  The mappings for any
      * applicable {@link javax.servlet.Filter}s are not indicated in the result.
+     * If the currently active {@link javax.servlet.Servlet} invocation was obtained
+     * by a call to {@link ServletRequest#getRequestDispatcher}
+     * followed by a call to {@link RequestDispatcher#forward}, the returned
+     * {@code ServletMapping} is the one corresponding to the path used to
+     * obtain the {@link RequestDispatcher}.  If the currently active
+     * {@code Servlet} invocation was obtained by a call to {@link ServletRequest#getRequestDispatcher}
+     * followed by a call to {@link RequestDispatcher#include}, the returned
+     * {@code ServletMapping} is the one corresponding path that caused the
+     * first {@code Servlet} in the invocation sequence to be invoked.  See
+     * sections 9.3.1 and 9.4.2 of the specification document for additional
+     * request attributes related to {@code ServletMapping}.
+     * 
      * The returned object is immutable.  Servlet 4.0 compliant implementations 
      * must override this method.</p>
      * 
