@@ -255,16 +255,15 @@ public interface HttpServletRequest extends ServletRequest {
      * <p>Return the {@link ServletMapping} by which the {@link HttpServlet} for
      * this {@code HttpServletRequest} was invoked.  The mappings for any
      * applicable {@link javax.servlet.Filter}s are not indicated in the result.
-     * Each invocation of this method must return a fresh instance of {@code Mapping}.  
-     * The implementation must retain no reference to the returned {@code Mapping}.  
-     * Servlet 4.0 compliant implementations must override this method.</p>
+     * The returned object is immutable.  Servlet 4.0 compliant implementations 
+     * must override this method.</p>
      * 
      * @implSpec
-     * The default implementation returns a {@code Mapping} that returns the
+     * The default implementation returns a {@code ServletMapping} that returns the
      * empty string for the match value and pattern and {@link MappingMatch#UNKNOWN}
      * for the match type.
      *
-     * @return A fresh instance of {@code Mapping} describing the manner in which
+     * @return An instance of {@code ServletMapping} describing the manner in which
      * the current request was invoked.
      * 
      * @since 4.0
