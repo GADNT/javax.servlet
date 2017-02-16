@@ -72,10 +72,5 @@ public enum MappingMatch {
      * <p>This is used when the mapping was achieved
      * using a path, such as "{@code /faces/*}".</p>
      */
-    PATH,
-    /**
-     * <p>This is used when the container does not
-     * know the mapping type and cannot discover it.</p>
-     */
-    UNKNOWN
+    PATH
 }
