@@ -42,7 +42,7 @@
 package javax.servlet.http;
 
 /**
- * <p>Enumeration of Servlet or Filter mapping types.</p>
+ * <p>Enumeration of Servlet mapping types.</p>
  *
  * @since 4.0
  */

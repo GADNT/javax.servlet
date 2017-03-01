@@ -78,25 +78,25 @@ package javax.servlet.http;
  *   </tr>
  *   <tr>
  *     <td>""</td>
- *     <td>/</td>
+ *     <td>""</td>
  *     <td>/</td>
  *     <td>CONTEXT_ROOT</td>
  *   </tr>
  *   <tr>
  *     <td>"/MyServlet"</td>
- *     <td>/MyServlet</td>
+ *     <td>MyServlet</td>
  *     <td>/MyServlet</td>
  *     <td>EXACT</td>
  *   </tr>
  *   <tr>
  *     <td>"/foo.extension"</td>
- *     <td>/foo.extension</td>
+ *     <td>foo</td>
  *     <td>/*.extension</td>
  *     <td>EXTENSION</td>
  *   </tr>
  *   <tr>
  *     <td>"/path/foo"</td>
- *     <td>/path/foo</td>
+ *     <td>foo</td>
  *     <td>/path/*</td>
  *     <td>PATH</td>
  *   </tr>  
