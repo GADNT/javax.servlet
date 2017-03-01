@@ -47,7 +47,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/** Build a request to be pushed.
+/** 
+ * Build a request to be pushed.
+ * 
+ * According section 8.2 of RFC 7540, a promised request must be cacheable and
+ * safe without a request body.
  *
  * <p>A PushBuilder is obtained by calling {@link
  * HttpServletRequest#getPushBuilder()}.  Each call to this method will
@@ -94,9 +98,9 @@ import javax.servlet.http.HttpSession;
  * to the PushBuilder, unless the {@link Cookie#getMaxAge()} is &lt;=0, in which
  * case the Cookie will be removed from the builder.</li>
  *
- * <li>If this request has has the conditional headers If-Modified-Since
- * or If-None-Match, then the {@link #isConditional()} header is set to
- * true.</li> 
+ * <li>If this request has either of the conditional headers
+ * "If-Modified-Since" or "If-None-Match", then {@link #isConditional()}
+ * must return {@code true}.</li>
  *
  * </ul> 
  *
@@ -121,11 +125,11 @@ public interface PushBuilder {
     /** 
      * <p>Set the method to be used for the push.</p>
      * 
-     * <p>Any non-empty String may be used for the method.</p>
-     *
      * @throws NullPointerException if the argument is {@code null}
      *
-     * @throws IllegalArgumentException if the argument is the empty String
+     * @throws IllegalArgumentException if the argument is the empty String,
+     *         or any non-cacheable or unsafe methods defined in RFC 7231,
+     *         which are POST, PUT, DELETE, CONNECT, OPTIONS and TRACE.
      *
      * @param method the method to be used for the push.  
      * @return this builder.
